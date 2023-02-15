@@ -1,0 +1,29 @@
+service: serverlessSetup
+
+# cloud providers
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-central-1
+
+# serverless functions
+functions:
+  testGet: 
+    handler: src/functions/testGet.handler
+    events: # event that triggers this function
+      - http: 
+          path: serverlessSetup/get
+          method: get
+  testPost:
+    handler: src/functions/testPost.handler
+    events:
+      - http:
+          path: serverlessSetup/post
+          method: post
+
+# serverless plugins
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+# resources your functions use
